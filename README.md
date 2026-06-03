@@ -2,10 +2,13 @@
 
 专业宠物遛狗平台 —— 连接宠物主与认证遛狗师，全程 GPS 追踪，安心又快乐。
 
+[![Deploy](https://img.shields.io/badge/Live-puppypaw.vercel.app-FF6B2C?logo=vercel)](https://puppypaw.vercel.app)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-4-06B6D4?logo=tailwindcss)
+
+**线上体验：https://puppypaw.vercel.app**
 
 ## 截图预览
 
