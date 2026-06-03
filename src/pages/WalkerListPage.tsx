@@ -26,6 +26,14 @@ interface Walker {
   verified: boolean;
   tags: string[];
   responseRate: number;
+  creditScore: number;
+}
+
+function creditLevel(score: number): { label: string; color: string; bg: string } {
+  if (score >= 90) return { label: '金牌', color: '#D97706', bg: '#FFFBEB' };
+  if (score >= 80) return { label: '优秀', color: '#059669', bg: '#ECFDF5' };
+  if (score >= 60) return { label: '良好', color: '#2563EB', bg: '#EFF6FF' };
+  return { label: '普通', color: '#6B7280', bg: '#F3F4F6' };
 }
 
 /* ── Mock data ───────────────────────────────────────────────── */
@@ -35,35 +43,35 @@ const WALKERS: Walker[] = [
     rating: 4.9, reviewCount: 127, repeatClients: 23,
     bio: '养犬 8 年，持有宠物护理资格证，熟悉各类犬种。全程实时拍照汇报，随叫随到。',
     distance: 0.3, lastActive: '今天 10:23', price: 45,
-    verified: true, tags: ['大型犬', '多犬同行'], responseRate: 98,
+    verified: true, tags: ['大型犬', '多犬同行'], responseRate: 98, creditScore: 92,
   },
   {
     id: '2', name: '陈小燕', initials: '陈', avatarColor: '#E91E8C',
     rating: 4.8, reviewCount: 89, repeatClients: 18,
     bio: '专业训犬师出身，擅长处理敏感犬只，服务细心负责，满意率 100%。',
     distance: 0.7, lastActive: '今天 08:45', price: 40,
-    verified: true, tags: ['小型犬', '老年犬'], responseRate: 95,
+    verified: true, tags: ['小型犬', '老年犬'], responseRate: 95, creditScore: 82,
   },
   {
     id: '3', name: '李浩然', initials: '李', avatarColor: '#3B82F6',
     rating: 4.7, reviewCount: 203, repeatClients: 45,
     bio: '热爱动物，已完成 400+ 次服务。每次附路线回放报告，好评率持续 100%。',
     distance: 1.2, lastActive: '今天 07:30', price: 38,
-    verified: true, tags: ['中型犬', '实时汇报'], responseRate: 92,
+    verified: true, tags: ['中型犬', '实时汇报'], responseRate: 92, creditScore: 85,
   },
   {
     id: '4', name: '王婷婷', initials: '王', avatarColor: '#10B981',
     rating: 4.6, reviewCount: 56, repeatClients: 12,
     bio: '动物爱好者，时间灵活，周末全天可接单，价格实惠，沟通顺畅。',
     distance: 1.8, lastActive: '昨天 21:00', price: 35,
-    verified: false, tags: ['小型犬', '周末专场'], responseRate: 88,
+    verified: false, tags: ['小型犬', '周末专场'], responseRate: 88, creditScore: 68,
   },
   {
     id: '5', name: '刘明远', initials: '刘', avatarColor: '#8B5CF6',
     rating: 4.9, reviewCount: 312, repeatClients: 67,
     bio: '全职遛狗师，4 年经验，服务过 300+ 只不同犬种，获平台年度最佳评选。',
     distance: 2.1, lastActive: '今天 09:15', price: 52,
-    verified: true, tags: ['大型犬', '年度最佳'], responseRate: 99,
+    verified: true, tags: ['大型犬', '年度最佳'], responseRate: 99, creditScore: 96,
   },
 ];
 
@@ -89,7 +97,7 @@ function WalkerCard({ walker, onSelect }: { walker: Walker; onSelect: () => void
 
       {/* Main content */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        {/* Name + verified */}
+        {/* Name + verified + credit */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
           <span style={{ fontWeight: 700, color: T1, fontSize: 16 }}>{walker.name}</span>
           {walker.verified && (
@@ -97,6 +105,11 @@ function WalkerCard({ walker, onSelect }: { walker: Walker; onSelect: () => void
               认证遛狗师
             </span>
           )}
+          {(() => { const lvl = creditLevel(walker.creditScore); return (
+            <span style={{ fontSize: 10, fontWeight: 700, color: lvl.color, background: lvl.bg, padding: '2px 7px', borderRadius: 100, whiteSpace: 'nowrap', border: `1px solid ${lvl.color}30` }}>
+              {lvl.label === '金牌' ? '🏅' : lvl.label === '优秀' ? '⭐' : ''}{lvl.label} {walker.creditScore}分
+            </span>
+          ); })()}
         </div>
 
         {/* Rating row */}
@@ -158,7 +171,8 @@ export default function WalkerListPage() {
       if (sort === 'rating')    return b.rating - a.rating;
       if (sort === 'price_asc') return a.price - b.price;
       if (sort === 'distance')  return a.distance - b.distance;
-      return b.repeatClients - a.repeatClients; // recommended
+      // recommended: 60% credit score + 40% repeat clients
+      return (b.creditScore * 0.6 + b.repeatClients * 0.4) - (a.creditScore * 0.6 + a.repeatClients * 0.4);
     });
 
   const currentSort = SORT_OPTIONS.find(o => o.id === sort)?.label ?? '推荐排序';

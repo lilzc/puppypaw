@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { PawPrint, LogOut, LayoutDashboard, UserCircle } from 'lucide-react';
+import { PawPrint, LogOut, LayoutDashboard, UserCircle, MapPin } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
@@ -42,6 +42,13 @@ export default function Navbar() {
                 <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 20, background: '#FFF4EF', color: '#FF6B2C', fontWeight: 600, border: '1px solid rgba(255,107,44,0.2)' }}>
                   {user?.role === 'owner' ? '宠物主' : '遛狗师'}
                 </span>
+              </Link>
+              <Link to="/dog-map"
+                style={{ width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, color: '#78716C', transition: 'all 0.15s', textDecoration: 'none' }}
+                title="狗狗地图"
+                onMouseEnter={e => { e.currentTarget.style.background = '#F5F4F2'; e.currentTarget.style.color = '#1C1917'; }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#78716C'; }}>
+                <MapPin style={{ width: 18, height: 18 }} />
               </Link>
               <Link to="/profile"
                 style={{ width: 34, height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, color: '#78716C', transition: 'all 0.15s', textDecoration: 'none' }}

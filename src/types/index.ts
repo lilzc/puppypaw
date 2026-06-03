@@ -29,7 +29,11 @@ export interface Walker {
   verified: boolean;
   tags: string[];
   completedWalks: number;
+  creditScore?: number;
 }
+
+export type ServiceType = 'walk' | 'boarding' | 'grooming' | 'feeding';
+export type OrderUrgency = 'instant' | 'scheduled';
 
 export interface Order {
   id: string;

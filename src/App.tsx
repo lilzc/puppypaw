@@ -13,6 +13,7 @@ import WalkerRegisterPage from './pages/WalkerRegisterPage';
 import BookingPage from './pages/BookingPage';
 import PetInfoPage from './pages/PetInfoPage';
 import WalkerListPage from './pages/WalkerListPage';
+import DogMapPage from './pages/DogMapPage';
 import type { ReactNode } from 'react';
 
 function ProtectedRoute({ children, role }: { children: ReactNode; role?: 'owner' | 'walker' }) {
@@ -51,6 +52,7 @@ function AppLayout() {
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/pet-info" element={<PetInfoPage />} />
         <Route path="/walkers" element={<WalkerListPage />} />
+        <Route path="/dog-map" element={<DogMapPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
