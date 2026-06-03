@@ -85,7 +85,7 @@ export default function AuthPage() {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) nav(user?.role === 'owner' ? '/owner' : '/walker');
+    if (isAuthenticated) nav(user?.role === 'owner' ? '/home' : '/walker');
   }, [isAuthenticated, user, nav]);
 
 

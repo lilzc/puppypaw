@@ -582,50 +582,86 @@ export default function WalkerPage() {
             </>
           )}
 
-          {/* ════════════════ TAB: 收益中心 ════════════════ */}
+          {/* ════════════════ TAB: 收益中心（金融风格）════════════════ */}
           {mainTab === 'wallet' && (
-            <div style={{ ...card, padding: 20 }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-                <h3 style={{ fontWeight: 700, color: '#1C1917', fontSize: 15 }}>收益中心</h3>
-                <span style={{ fontSize: 12, color: '#A8A29E' }}>本月 2024-12</span>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
-                <div style={{ borderRadius: 14, padding: '14px 16px', background: '#FFF4EF', border: '1px solid rgba(255,107,44,0.18)' }}>
-                  <p style={{ fontSize: 12, color: '#78716C', marginBottom: 4 }}>待到账</p>
-                  <p style={{ fontWeight: 800, fontSize: 22, color: '#FF6B2C', lineHeight: 1 }}>{isDemo ? '¥105' : '¥0'}</p>
-                  <p style={{ fontSize: 11, color: '#A8A29E', marginTop: 4 }}>{isDemo ? '3 笔托管中 🔒' : '暂无托管'}</p>
-                </div>
-                <div style={{ borderRadius: 14, padding: '14px 16px', background: '#F9F8F6', border: '1px solid #E8E5E0' }}>
-                  <p style={{ fontSize: 12, color: '#78716C', marginBottom: 4 }}>已到账</p>
-                  <p style={{ fontWeight: 800, fontSize: 22, color: '#1C1917', lineHeight: 1 }}>{isDemo ? '¥1,280' : '¥0'}</p>
-                  <p style={{ fontSize: 11, color: '#A8A29E', marginTop: 4 }}>{isDemo ? '本月累计 ✓' : '接单后结算'}</p>
-                </div>
-              </div>
-
-              {isDemo ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {DEMO_TRANSACTIONS.map(tx => (
-                    <div key={tx.id} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <div style={{ width: 36, height: 36, borderRadius: 10, background: '#F9F8F6', border: '1px solid #E8E5E0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, flexShrink: 0 }}>{tx.petEmoji}</div>
-                      <div style={{ flex: 1 }}>
-                        <p style={{ fontSize: 13, color: '#1C1917', fontWeight: 500 }}>{tx.petName} · {tx.breed}</p>
-                        <p style={{ fontSize: 11, color: '#A8A29E', marginTop: 2 }}>{tx.owner} · {tx.date}</p>
+            <div>
+              {/* Balance hero */}
+              <div style={{ background: 'linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%)', borderRadius: 22, padding: '24px 22px', marginBottom: 14, position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: -20, right: -20, width: 110, height: 110, borderRadius: '50%', background: 'rgba(255,107,44,0.1)' }} />
+                <div style={{ position: 'absolute', bottom: -30, left: -10, width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,0.04)' }} />
+                <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, marginBottom: 6 }}>你好，{user?.name || '张大伟'} 🔥</p>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12, marginBottom: 12 }}>本月总收益</p>
+                <p style={{ fontWeight: 900, fontSize: 42, color: 'white', lineHeight: 1, marginBottom: 4, letterSpacing: -1 }}>
+                  {isDemo ? '¥1,280' : '¥0'}
+                  <span style={{ fontSize: 16, fontWeight: 400, color: 'rgba(255,255,255,0.5)', marginLeft: 6 }}>.00</span>
+                </p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 16 }}>
+                  {isDemo ? '↑ 比上月增长 ¥320' : '接单后开始结算'}
+                </p>
+                {/* Quick actions */}
+                <div style={{ display: 'flex', gap: 16 }}>
+                  {[
+                    { icon: '💸', label: '提现' },
+                    { icon: '📋', label: '账单' },
+                    { icon: '🛡', label: '保险' },
+                    { icon: '⋯', label: '更多' },
+                  ].map(a => (
+                    <div key={a.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, flex: 1 }}>
+                      <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18, cursor: 'pointer' }}>
+                        {a.icon}
                       </div>
-                      <div style={{ textAlign: 'right' }}>
-                        <p style={{ fontWeight: 700, fontSize: 13, color: '#1C1917' }}>+¥{tx.amount}</p>
-                        <span style={{ fontSize: 11, color: tx.status === 'pending' ? '#FF6B2C' : '#16A34A', fontWeight: 600 }}>
-                          {tx.status === 'pending' ? '托管中' : '已到账'}
-                        </span>
-                      </div>
+                      <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>{a.label}</span>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div style={{ padding: '24px 0', textAlign: 'center' }}>
-                  <div style={{ fontSize: 32, marginBottom: 10, opacity: 0.35 }}>📋</div>
-                  <p style={{ color: '#9B9B9B', fontSize: 13 }}>暂无订单记录</p>
+              </div>
+
+              {/* Horizontal scroll cards */}
+              <div style={{ display: 'flex', gap: 12, overflowX: 'auto', paddingBottom: 4, scrollbarWidth: 'none', marginBottom: 14 }}>
+                {[
+                  { label: '本月收入', value: isDemo ? '¥1,280' : '¥0', sub: '12月', gradA: '#FF6B35', gradB: '#FF9245' },
+                  { label: '待到账',   value: isDemo ? '¥105' : '¥0',   sub: '3笔托管中', gradA: '#8B7FD4', gradB: '#A78BFA' },
+                  { label: '已提现',   value: isDemo ? '¥980' : '¥0',   sub: '本月累计', gradA: '#06B6D4', gradB: '#0EA5E9' },
+                ].map(c => (
+                  <div key={c.label} style={{ minWidth: 150, borderRadius: 18, padding: '18px 16px', background: `linear-gradient(135deg,${c.gradA},${c.gradB})`, flexShrink: 0 }}>
+                    <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, marginBottom: 8 }}>{c.label}</p>
+                    <p style={{ color: 'white', fontWeight: 900, fontSize: 22, lineHeight: 1, marginBottom: 6 }}>{c.value}</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 11 }}>{c.sub}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Recent orders */}
+              <div style={{ ...card, padding: 18 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
+                  <h3 style={{ fontWeight: 700, color: '#1C1917', fontSize: 15, margin: 0 }}>最近订单</h3>
+                  <span style={{ fontSize: 12, color: '#A8A29E' }}>2024-12</span>
                 </div>
-              )}
+                {isDemo ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    {DEMO_TRANSACTIONS.map(tx => (
+                      <div key={tx.id} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <div style={{ width: 44, height: 44, borderRadius: 12, background: 'linear-gradient(135deg,#FF6B35,#FF9245)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22, flexShrink: 0 }}>{tx.petEmoji}</div>
+                        <div style={{ flex: 1 }}>
+                          <p style={{ fontSize: 14, color: '#1C1917', fontWeight: 600 }}>{tx.petName} · {tx.breed}</p>
+                          <p style={{ fontSize: 12, color: '#A8A29E', marginTop: 2 }}>{tx.owner} · {tx.date}</p>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                          <p style={{ fontWeight: 800, fontSize: 15, color: '#1C1917' }}>+¥{tx.amount}</p>
+                          <span style={{ fontSize: 11, color: tx.status === 'pending' ? '#FF6B2C' : '#16A34A', fontWeight: 600, display: 'block', marginTop: 2 }}>
+                            {tx.status === 'pending' ? '托管中' : '已到账'}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ padding: '24px 0', textAlign: 'center' }}>
+                    <div style={{ fontSize: 32, marginBottom: 10, opacity: 0.35 }}>📋</div>
+                    <p style={{ color: '#9B9B9B', fontSize: 13 }}>暂无订单记录</p>
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
