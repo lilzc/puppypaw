@@ -15,19 +15,26 @@ const MOCK_USERS: Record<string, User> = {
   'walker@demo.com': { id: '2', name: '张大伟', email: 'walker@demo.com', role: 'walker', avatar: '' },
 };
 
+const SESSION_KEY = 'puppypaw_session';
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    try {
+      const stored = sessionStorage.getItem(SESSION_KEY);
+      return stored ? JSON.parse(stored) : null;
+    } catch { return null; }
+  });
 
   const login = (email: string, _password: string, role: UserRole) => {
     const found = MOCK_USERS[email];
-    if (found && found.role === role) {
-      setUser(found);
-    } else {
-      setUser({ id: Date.now().toString(), name: email.split('@')[0], email, role });
-    }
+    const u = (found && found.role === role)
+      ? found
+      : { id: Date.now().toString(), name: email.split('@')[0], email, role };
+    setUser(u);
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(u));
   };
 
-  const logout = () => setUser(null);
+  const logout = () => { setUser(null); sessionStorage.removeItem(SESSION_KEY); };
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated: !!user }}>
