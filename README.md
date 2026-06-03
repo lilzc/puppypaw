@@ -12,17 +12,29 @@
 
 ## 截图预览
 
-| 首页 | 遛狗师列表 |
-|------|-----------|
-| ![首页](docs/screenshots/landing.png) | ![遛狗师列表](docs/screenshots/walkers.png) |
+### 宠物主端
 
-| GPS 实时追踪 | 服务评价 |
-|-------------|---------|
-| ![GPS追踪](docs/screenshots/tracking.png) | ![服务评价](docs/screenshots/review.png) |
+| 首页 | 多样化服务预约 |
+|------|-------------|
+| ![首页](docs/screenshots/landing.png) | ![预约服务](docs/screenshots/booking.png) |
 
-| 遛狗师控制台 |
-|-------------|
-| ![遛狗师控制台](docs/screenshots/walker.png) |
+| 遛狗师列表（信用排名） | GPS 实时追踪 |
+|---------------------|------------|
+| ![遛狗师列表](docs/screenshots/walkers.png) | ![GPS追踪](docs/screenshots/tracking.png) |
+
+| 服务评价 | 狗狗地图 |
+|---------|---------|
+| ![服务评价](docs/screenshots/review.png) | ![狗狗地图](docs/screenshots/dog-map.png) |
+
+### 遛狗师端
+
+| 订单管理 | 附近抢单 |
+|---------|---------|
+| ![订单管理](docs/screenshots/walker-orders.png) | ![附近抢单](docs/screenshots/walker-nearby.png) |
+
+| 信用档案 |
+|---------|
+| ![信用档案](docs/screenshots/walker-credit.png) |
 
 ---
 
