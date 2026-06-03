@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { PawPrint, ChevronRight, Check, AlertTriangle, Upload, X } from 'lucide-react';
+import { PawPrint, ChevronRight, Check, AlertTriangle, Upload } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 /* ── Constants ───────────────────────────────────────────────── */
@@ -490,7 +490,7 @@ export default function OwnerRegisterPage() {
   const { login }       = useAuth();
   const nav             = useNavigate();
   const [phone, setPhone]   = useState('');
-  const [name,  setName]    = useState('');
+  const [, setName]    = useState('');
 
   const toStep2 = useCallback((ph: string) => { setPhone(ph); setStep(2); }, []);
   const toStep3 = useCallback((nm: string) => { setName(nm); setStep(3); }, []);

@@ -470,8 +470,7 @@ export default function OwnerPage() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2" style={{ width: 16, height: 16, color: '#A8A29E' }} />
             <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="搜索遛狗师或服务标签…"
               className="w-full rounded-2xl pl-11 pr-5 py-3.5 text-sm outline-none transition-all"
-              style={{ color: '#1A1A1A' }}
-              style={{ background: '#F5F4F2', border: '1px solid #E8E5E0', caretColor: '#FF9245' }}
+              style={{ color: '#1A1A1A', background: '#F5F4F2', border: '1px solid #E8E5E0', caretColor: '#FF9245' }}
               onFocus={e => { e.target.style.borderColor = 'rgba(255,107,44,0.5)'; e.target.style.background = '#FFFFFF'; e.target.style.boxShadow = '0 0 0 3px rgba(255,107,44,0.08)'; }}
               onBlur={e => { e.target.style.borderColor = '#E0E0E0'; e.target.style.background = '#F5F4F2'; e.target.style.boxShadow = 'none'; }} />
           </div>

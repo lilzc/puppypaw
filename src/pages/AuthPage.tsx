@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { Eye, EyeOff, ArrowRight, PawPrint, Check } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -188,9 +188,6 @@ export default function AuthPage() {
               const cfg    = ROLES[r];
               const active = role === r;
               const c      = r === 'owner' ? '255,107,44' : '139,92,246';
-              const hintColor = r === 'owner'
-                ? 'rgba(255,200,130,0.75)'
-                : 'rgba(196,181,253,0.75)';
               return (
                 <button
                   key={r}

@@ -134,7 +134,7 @@ export default function LandingPage() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 24, position: 'relative' }}>
-            {STEPS.map((s, i) => (
+            {STEPS.map((s) => (
               <div key={s.n} style={{ textAlign: 'center' }}>
                 <div style={{ width: 72, height: 72, borderRadius: '50%', margin: '0 auto 16px', background: '#FFF4EF', border: '2px solid rgba(255,107,44,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span style={{ fontWeight: 900, fontSize: 20, background: 'linear-gradient(135deg,#FF6B2C,#FF9245)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{s.n}</span>
